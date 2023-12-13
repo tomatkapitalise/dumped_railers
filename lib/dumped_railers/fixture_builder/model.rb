@@ -13,7 +13,7 @@ module DumpedRailers
       end
   
       def build!
-        fixture_body = @fixture_records.map(&:build!).to_h
+        fixture_body = @fixture_records.map(&:build!).compact.to_h
         fixture = fixture_body.reverse_merge build_fixture_header_for(@model)
   
         [@model.table_name, fixture]
