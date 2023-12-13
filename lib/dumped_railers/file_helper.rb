@@ -10,9 +10,9 @@ module DumpedRailers
           if File.file?(path)
             path
           else
-            [*Dir["#{path}/{**,*}/*.yml"], "#{path}.yml"].select { |f|
-              ::File.file?(f)
-            }
+            [*Dir["#{path}/{**,*}/*.yml"], "#{path}.yml"].select do |f|
+              ::File.file?(f) && !File.basename(f).start_with?('_')
+            end
           end
         }.uniq.compact
 
