@@ -13,7 +13,7 @@ module DumpedRailers
         id = @record.id
         attributes = @record.attributes.deep_dup
         @preprocessors.each do |preprocessor|
-          preprocessor.call(@model, attributes)
+          preprocessor.call(@record, @model, attributes)
         end
 
         # convert "belong_to association" foreign keys into record-unique labels
@@ -35,6 +35,10 @@ module DumpedRailers
               attributes.delete(rel.foreign_key.to_s)
             )
           end
+        end
+
+        if attributes.empty?
+          return nil
         end
 
         [record_label_for(@model.name, id), attributes]

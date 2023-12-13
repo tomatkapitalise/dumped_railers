@@ -7,7 +7,7 @@ module DumpedRailers
         @ignorable_columns = ignorable_columns.compact.map(&:to_s)
       end
 
-      def call(_model, attributes)
+      def call(_record, _model, attributes)
         attributes.delete_if { |column_name, _v|
           @ignorable_columns.include?(column_name)
         }
