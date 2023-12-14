@@ -18,7 +18,7 @@ module DumpedRailers
 
         yaml_files.map { |file| 
           raw_data = ::File.read(file)
-          YAML.load(raw_data)
+          YAML.unsafe_load(raw_data)
         }
       end
 
